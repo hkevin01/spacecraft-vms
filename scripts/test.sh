@@ -28,7 +28,7 @@ error() {
 # Function to run firmware tests
 test_firmware() {
     info "Running firmware tests..."
-    cd "$PROJECT_ROOT/firmware"
+    cd "$PROJECT_ROOT/src/firmware"
 
     if [ ! -d "build" ]; then
         info "Building firmware first..."
@@ -44,7 +44,7 @@ test_firmware() {
         info "Generating coverage report..."
         gcovr --exclude-unreachable-branches --print-summary --root .
         gcovr --html-details -o build/coverage.html --root .
-        info "Coverage report generated: firmware/build/coverage.html"
+        info "Coverage report generated: src/firmware/build/coverage.html"
     else
         warn "gcovr not found, skipping coverage report"
     fi
@@ -53,7 +53,7 @@ test_firmware() {
 # Function to run static analysis
 run_static_analysis() {
     info "Running static analysis..."
-    cd "$PROJECT_ROOT/firmware"
+    cd "$PROJECT_ROOT/src/firmware"
 
     # Run cppcheck
     if command -v cppcheck &> /dev/null; then
@@ -108,7 +108,7 @@ run_integration_tests() {
 
     # Add integration test logic here
     # For now, just run a smoke test
-    cd "$PROJECT_ROOT/firmware/build"
+    cd "$PROJECT_ROOT/src/firmware/build"
     if [ -f "vms_posix" ]; then
         info "Running VMS POSIX smoke test..."
         ./vms_posix

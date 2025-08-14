@@ -28,7 +28,7 @@ error() {
 # Function to build firmware
 build_firmware() {
     info "Building firmware..."
-    cd "$PROJECT_ROOT/firmware"
+    cd "$PROJECT_ROOT/src/firmware"
 
     # Clean previous build
     rm -rf build
@@ -64,7 +64,7 @@ build_ros2() {
 # Function to run tests
 run_tests() {
     info "Running firmware tests..."
-    cd "$PROJECT_ROOT/firmware"
+    cd "$PROJECT_ROOT/src/firmware"
     ctest --test-dir build --output-on-failure
 
     if [ -d "$PROJECT_ROOT/src/ros2_ws" ]; then
