@@ -2,84 +2,84 @@ name: Firmware CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths:
-      - 'src/firmware/**'
-      - 'firmware/**'
-      - '.github/workflows/firmware.yml'
+      - "src/firmware/**"
+      - "firmware/**"
+      - ".github/workflows/firmware.yml"
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths:
-      - 'src/firmware/**'
-      - 'firmware/**'
-      - '.github/workflows/firmware.yml'
+      - "src/firmware/**"
+      - "firmware/**"
+      - ".github/workflows/firmware.yml"
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         build_type: [Debug, Release]
-        
+
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential cmake ninja-build gcovr lcov cppcheck clang-tidy
-    
-    - name: Configure CMake
-      run: |
-        cd firmware
-        cmake -B build -DBUILD_POSIX=ON -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_C_FLAGS="--coverage"
-    
-    - name: Build
-      run: |
-        cd firmware
-        cmake --build build --config ${{ matrix.build_type }}
-    
-    - name: Test
-      run: |
-        cd firmware
-        ctest --test-dir build --output-on-failure --verbose
-    
-    - name: Generate Coverage Report
-      if: matrix.build_type == 'Debug'
-      run: |
-        cd firmware
-        gcovr --xml-pretty --exclude-unreachable-branches --print-summary -o coverage.xml --root .
-        gcovr --html-details --exclude-unreachable-branches --print-summary -o coverage.html --root .
-    
-    - name: Static Analysis
-      if: matrix.build_type == 'Debug'
-      run: |
-        cd firmware
-        cppcheck --enable=all --xml --xml-version=2 --suppress=missingIncludeSystem . 2> cppcheck-report.xml || true
-        clang-tidy middleware/**/*.c -- -Ibuild/_deps/*/include -I. -Iapp -Imiddleware -Isafety 2> clang-tidy-report.txt || true
-    
-    - name: Upload Coverage Reports
-      if: matrix.build_type == 'Debug'
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-reports
-        path: |
-          firmware/coverage.xml
-          firmware/coverage.html
-    
-    - name: Upload Static Analysis
-      if: matrix.build_type == 'Debug'
-      uses: actions/upload-artifact@v4
-      with:
-        name: static-analysis
-        path: |
-          firmware/cppcheck-report.xml
-          firmware/clang-tidy-report.txt
-    
-    - name: Upload Test Logs
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-logs-${{ matrix.build_type }}
-        path: firmware/build/Testing/
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build gcovr lcov cppcheck clang-tidy
+
+      - name: Configure CMake
+        run: |
+          cd firmware
+          cmake -B build -DBUILD_POSIX=ON -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_C_FLAGS="--coverage"
+
+      - name: Build
+        run: |
+          cd firmware
+          cmake --build build --config ${{ matrix.build_type }}
+
+      - name: Test
+        run: |
+          cd firmware
+          ctest --test-dir build --output-on-failure --verbose
+
+      - name: Generate Coverage Report
+        if: matrix.build_type == 'Debug'
+        run: |
+          cd firmware
+          gcovr --xml-pretty --exclude-unreachable-branches --print-summary -o coverage.xml --root .
+          gcovr --html-details --exclude-unreachable-branches --print-summary -o coverage.html --root .
+
+      - name: Static Analysis
+        if: matrix.build_type == 'Debug'
+        run: |
+          cd firmware
+          cppcheck --enable=all --xml --xml-version=2 --suppress=missingIncludeSystem . 2> cppcheck-report.xml || true
+          clang-tidy middleware/**/*.c -- -Ibuild/_deps/*/include -I. -Iapp -Imiddleware -Isafety 2> clang-tidy-report.txt || true
+
+      - name: Upload Coverage Reports
+        if: matrix.build_type == 'Debug'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            firmware/coverage.xml
+            firmware/coverage.html
+
+      - name: Upload Static Analysis
+        if: matrix.build_type == 'Debug'
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-analysis
+          path: |
+            firmware/cppcheck-report.xml
+            firmware/clang-tidy-report.txt
+
+      - name: Upload Test Logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs-${{ matrix.build_type }}
+          path: firmware/build/Testing/

@@ -1,0 +1,30 @@
+# CODEOWNERS file for spacecraft-vms
+
+# Global owners
+* @hkevin01
+
+# Firmware and embedded systems
+/src/firmware/ @hkevin01
+/firmware/ @hkevin01
+*.c @hkevin01
+*.h @hkevin01
+
+# ROS 2 and autonomy
+/src/ros2_ws/ @hkevin01
+*.py @hkevin01
+
+# Simulation and modeling
+/src/simulation/ @hkevin01
+
+# Build and CI
+/CMakeLists.txt @hkevin01
+/.github/ @hkevin01
+/scripts/ @hkevin01
+
+# Documentation
+/docs/ @hkevin01
+README.md @hkevin01
+
+# Safety-critical components (require additional review)
+/src/firmware/safety/ @hkevin01
+/src/firmware/middleware/fdir/ @hkevin01

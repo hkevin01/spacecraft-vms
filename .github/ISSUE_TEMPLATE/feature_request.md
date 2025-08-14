@@ -20,7 +20,7 @@ Add any other context or screenshots about the feature request here.
 
 **Implementation Considerations**
 - [ ] This affects firmware components
-- [ ] This affects ROS 2 components  
+- [ ] This affects ROS 2 components
 - [ ] This affects simulation components
 - [ ] This requires hardware changes
 - [ ] This affects safety-critical systems
