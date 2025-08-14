@@ -1,0 +1,81 @@
+# Build artifacts
+build/
+dist/
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+install_manifest.txt
+_deps/
+
+# Compiler outputs
+*.o
+*.obj
+*.d
+*.map
+*.lst
+*.sym
+*.elf
+*.bin
+*.hex
+
+# Coverage reports
+*.gcno
+*.gcda
+*.gcov
+coverage/
+lcov.info
+*.profdata
+*.profraw
+
+# Static analysis
+cppcheck-report.xml
+scan-build-*/
+
+# IDE files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/c_cpp_properties.json
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Dependencies
+external/
+vendor/
+node_modules/
+venv/
+.env
+
+# ROS 2
+install/
+log/
+build/
+*.pyc
+__pycache__/
+
+# Simulation
+*.bag
+*.db3
+
+# Documentation build
+docs/_build/
+docs/html/
+docs/latex/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
