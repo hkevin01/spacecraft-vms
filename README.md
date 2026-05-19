@@ -112,13 +112,13 @@ spacecraft-vms/                   # 50+ files, ~15,000 lines of production code
 - **I2C**: 400kHz fast mode, multi-master capability for sensor networks
 
 ### Task Architecture (FreeRTOS)
-| Task Name | Priority | Stack (KB) | Period | Function |
+| <sub>Task Name</sub> | <sub>Priority</sub> | <sub>Stack (KB)</sub> | <sub>Period</sub> | <sub>Function</sub> |
 |-----------|----------|------------|--------|----------|
-| Navigation | 5 (High) | 8 | 10ms | Attitude determination, orbit propagation |
-| Telemetry | 4 | 4 | 100ms | Packet assembly, ground communication |
-| Payload | 3 | 6 | 1s | Science data collection and processing |
-| Housekeeping | 2 | 2 | 10s | Health monitoring, parameter updates |
-| Background | 1 (Low) | 2 | As needed | File system maintenance, diagnostics |
+| <sub>Navigation</sub> | <sub>5 (High)</sub> | <sub>8</sub> | <sub>10ms</sub> | <sub>Attitude determination, orbit propagation</sub> |
+| <sub>Telemetry</sub> | <sub>4</sub> | <sub>4</sub> | <sub>100ms</sub> | <sub>Packet assembly, ground communication</sub> |
+| <sub>Payload</sub> | <sub>3</sub> | <sub>6</sub> | <sub>1s</sub> | <sub>Science data collection and processing</sub> |
+| <sub>Housekeeping</sub> | <sub>2</sub> | <sub>2</sub> | <sub>10s</sub> | <sub>Health monitoring, parameter updates</sub> |
+| <sub>Background</sub> | <sub>1 (Low)</sub> | <sub>2</sub> | <sub>As needed</sub> | <sub>File system maintenance, diagnostics</sub> |
 
 ## ⚡ Hardware Specifications & Performance
 
@@ -131,13 +131,13 @@ spacecraft-vms/                   # 50+ files, ~15,000 lines of production code
 - **Power**: 1.62V-3.6V supply, <200mA active, <2.5μA standby
 
 ### Interface Specifications
-| Interface | Speed | Pins | Use Case | Performance |
+| <sub>Interface</sub> | <sub>Speed</sub> | <sub>Pins</sub> | <sub>Use Case</sub> | <sub>Performance</sub> |
 |-----------|--------|------|----------|-------------|
-| CAN-FD #1 | 1/5 Mbps | PD0/PD1 | Spacecraft bus | 95% efficiency, <1ms latency |
-| UART #1 | 115.2 kbps | PA9/PA10 | Debug console | DMA-enabled, HW flow control |
-| UART #2 | 921.6 kbps | PD5/PD6 | Telemetry | 8N1, error detection |
-| SPI #1 | 42 MHz | PA5/PA6/PA7 | IMU sensors | 16-bit frames, DMA bursts |
-| I2C #1 | 400 kHz | PB8/PB9 | Magnetometer | Multi-master, clock stretching |
+| <sub>CAN-FD #1</sub> | <sub>1/5 Mbps</sub> | <sub>PD0/PD1</sub> | <sub>Spacecraft bus</sub> | <sub>95% efficiency, <1ms latency</sub> |
+| <sub>UART #1</sub> | <sub>115.2 kbps</sub> | <sub>PA9/PA10</sub> | <sub>Debug console</sub> | <sub>DMA-enabled, HW flow control</sub> |
+| <sub>UART #2</sub> | <sub>921.6 kbps</sub> | <sub>PD5/PD6</sub> | <sub>Telemetry</sub> | <sub>8N1, error detection</sub> |
+| <sub>SPI #1</sub> | <sub>42 MHz</sub> | <sub>PA5/PA6/PA7</sub> | <sub>IMU sensors</sub> | <sub>16-bit frames, DMA bursts</sub> |
+| <sub>I2C #1</sub> | <sub>400 kHz</sub> | <sub>PB8/PB9</sub> | <sub>Magnetometer</sub> | <sub>Multi-master, clock stretching</sub> |
 
 ### Power Budget Analysis
 - **Active Mode**: 150mA @ 3.3V (495mW) during nominal operations
